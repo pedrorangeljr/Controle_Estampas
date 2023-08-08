@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +33,25 @@ public class ServletLogin extends HttpServlet {
 			
 			String email = request.getParameter("email");
 			String senha = request.getParameter("senha");
+			String url = request.getParameter("url");
 			
-			System.out.println(email);
-			System.out.println(senha);
+			if(email != null && !email.isEmpty() && senha != null && !senha.isEmpty()) {
+				
+				Login login = new Login();
+				
+				login.setEmail(email);
+				login.setSenha(senha);
+				
+				
+			}
+			
+			else {
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+				request.setAttribute("msg", "email e/ou Senha incorreto");
+				dispatcher.forward(request, response);
+			}
+			
 			
 		} catch (Exception e) {
 			

@@ -3,7 +3,7 @@ package model;
 public class Login {
 	
 	private Long id;
-	private String login;
+	private String email;
 	private String senha;
 	
 	public Long getId() {
@@ -12,11 +12,11 @@ public class Login {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getSenha() {
 		return senha;
