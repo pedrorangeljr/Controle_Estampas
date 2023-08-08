@@ -22,7 +22,7 @@ public class DaoLogin {
 		
 		try {
 			
-			String sql = "SELECT * FROM login WHERE upper(email) = upper(?) AND senha(upper) = upper(?)";
+			String sql = "SELECT * FROM login WHERE upper(email) = upper(?) AND upper(senha) = upper(?)";
 			PreparedStatement validar = connection.prepareStatement(sql);
 			
 			validar.setString(1, login.getEmail());

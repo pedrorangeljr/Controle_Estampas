@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoLogin;
 import model.Login;
 
 
@@ -16,6 +17,7 @@ import model.Login;
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private DaoLogin daoLogin = new DaoLogin();
     
     public ServletLogin() {
       
@@ -42,7 +44,24 @@ public class ServletLogin extends HttpServlet {
 				login.setEmail(email);
 				login.setSenha(senha);
 				
-				
+				if(daoLogin.validarAutenticacao(login)) {
+					
+					request.getSession().setAttribute("usuario", login.getEmail());
+					
+					if(url == null || url.equals("null")) {
+						
+						url = "principal/principal.jsp";
+					}
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+					dispatcher.forward(request, response);
+				}
+				else {
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+					request.setAttribute("msg", "email e/ou Senha incorreto");
+					dispatcher.forward(request, response);
+				}
 			}
 			
 			else {
